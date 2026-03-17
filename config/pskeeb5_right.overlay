@@ -1,0 +1,4 @@
+&mouse_ps2_input_listener {
+    // Use the navigation layer as the explicit trackpoint scroll layer.
+    scroll-layer = <2>;
+};
