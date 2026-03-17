@@ -7,5 +7,13 @@ manifest:
       remote: klesh
       revision: main
       import: app/west.yml
+    # Override the imported PS/2 trackpoint driver revision.
+    # Newer driver versions require an explicit `scroll-layer` property,
+    # which this config does not provide, so scroll mode stops working.
+    # Pinning to the last commit that still scrolls on any non-default layer
+    # restores the previous "hold layer key, move trackpoint to scroll" behavior.
+    - name: kb_zmk_ps2_mouse_trackpoint_driver
+      remote: klesh
+      revision: 3f93c89ec53671e027ab0eb294cab8994472f962
   self:
     path: config
