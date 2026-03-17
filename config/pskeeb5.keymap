@@ -8,23 +8,23 @@
 #include <behaviors/mouse_setting.dtsi>
 #include <dt-bindings/zmk/mouse_settings.h>
 
-// 触控板灵敏度快捷键，放在设备控制层中直接调用。
+// 小红点灵敏度快捷键，放在设备控制层中直接调用。
 #define U_MSS_TP_S_I &mms MS_TP_SENSITIVITY_INCR
 #define U_MSS_TP_S_D &mms MS_TP_SENSITIVITY_DECR
 
 // 默认层旋钮行为：
 // 左旋钮顺时针音量加、逆时针音量减；
 // 右旋钮顺时针 Tab、逆时针 Shift+Tab。
-#define BASE_LEFT_ENCODER &inc_dec_kp C_VOL_UP C_VOL_DN
-#define BASE_RIGHT_ENCODER &inc_dec_kp TAB LS(TAB)
+#define BASE_LEFT_ENCODER &inc_dec_kp C_VOL_DN C_VOL_UP
+#define BASE_RIGHT_ENCODER &inc_dec_kp LS(TAB) TAB
 
 // 第 2 层旋钮行为：
 // 右旋钮顺时针右箭头、逆时针左箭头。
-#define NAV_RIGHT_ENCODER &inc_dec_kp RIGHT LEFT
+#define NAV_RIGHT_ENCODER &inc_dec_kp LEFT RIGHT
 
 // 第 3 层旋钮行为：
 // 左旋钮顺时针亮度加、逆时针亮度减。
-#define SYMBOL_LEFT_ENCODER &inc_dec_kp C_BRI_UP C_BRI_DN
+#define SYMBOL_LEFT_ENCODER &inc_dec_kp C_BRI_DN C_BRI_UP
 
 / {
     behaviors {
@@ -178,7 +178,7 @@
         // 第 5 层：设备控制层
         // - 通过第 2 层 + 第 3 层同时按住进入
         // - 左手切换蓝牙 1-5
-        // - 右手调触控板灵敏度、清空当前蓝牙 profile 配对
+        // - 右手调小红点灵敏度、清空当前蓝牙 profile 配对
         // - 旋钮旋转显式保持第 0 层行为，按下继续走按键透传
         device_layer {
             bindings = <

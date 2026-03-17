@@ -1,0 +1,15 @@
+#include <input/processors.dtsi>
+#include <dt-bindings/zmk/input_transform.h>
+
+&mouse_ps2_input_listener {
+    // 按住当前位置 32 的层键（当前是第 2 层 Space）时，
+    // 让小红点从鼠标移动切换为滚动。
+    scroller {
+        layers = <2>;
+        input-processors = <
+            &zip_xy_scaler 1 15
+            &zip_xy_to_scroll_mapper
+            &zip_scroll_transform (INPUT_TRANSFORM_Y_INVERT)
+        >;
+    };
+};
