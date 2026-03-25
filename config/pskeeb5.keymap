@@ -8,27 +8,27 @@
 #include <behaviors/mouse_setting.dtsi>
 #include <dt-bindings/zmk/mouse_settings.h>
 
-// 小红点灵敏度快捷键，放在设备控制层中直接调用。
+// 小红点灵敏度快捷键，放在设备控制层中直接调用
 #define U_MSS_TP_S_I &mms MS_TP_SENSITIVITY_INCR
 #define U_MSS_TP_S_D &mms MS_TP_SENSITIVITY_DECR
 
 // 默认层旋钮行为：
-// 左旋钮顺时针音量加、逆时针音量减；
-// 右旋钮顺时针 Tab、逆时针 Shift+Tab。
+// 左旋钮顺时针音量加、逆时针音量减
+// 右旋钮顺时针上滚动、逆时针下滚动
 #define BASE_LEFT_ENCODER &inc_dec_kp C_VOL_DN C_VOL_UP
-#define BASE_RIGHT_ENCODER &inc_dec_kp LS(TAB) TAB
+#define BASE_RIGHT_ENCODER &inc_dec_msc SCRL_DOWN SCRL_UP
 
 // 第 2 层旋钮行为：
-// 右旋钮顺时针右箭头、逆时针左箭头。
+// 右旋钮顺时针右箭头、逆时针左箭头
 #define NAV_RIGHT_ENCODER &inc_dec_kp LEFT RIGHT
 
 // 第 3 层旋钮行为：
-// 左旋钮顺时针亮度加、逆时针亮度减。
+// 左旋钮顺时针亮度加、逆时针亮度减
 #define SYMBOL_LEFT_ENCODER &inc_dec_kp C_BRI_DN C_BRI_UP
 
 / {
     behaviors {
-        // 轻击输出普通按键，按住输出修饰键。
+        // 轻击输出普通按键，按住输出修饰键
         ht: hold_tap {
             display-name = "Hold Tap";
             label = "hold_tap";
@@ -40,7 +40,7 @@
             bindings = <&kp>, <&kp>;
         };
 
-        // 轻击输出按键，按住临时进入目标层。
+        // 轻击输出按键，按住临时进入目标层
         lt: layer_tap {
             display-name = "Layer Tap";
             compatible = "zmk,behavior-hold-tap";
@@ -50,26 +50,40 @@
             quick-tap-ms = <200>;
             bindings = <&mo>, <&kp>;
         };
+
+        // 编码器滚轮行为模板，使用时传入两个滚轮方向参数
+        inc_dec_msc: sensor_rotate_msc {
+            compatible = "zmk,behavior-sensor-rotate-var";
+            #sensor-binding-cells = <2>;
+            bindings = <&msc>, <&msc>;
+        };
     };
 
     combos {
         compatible = "zmk,combos";
 
-        // E + R 并击输出 Tab。
+        // E + R 并击输出 Tab
         combo_tab {
             timeout-ms = <50>;
             key-positions = <2 3>;
             bindings = <&kp TAB>;
         };
 
-        // F + J 并击输出 F20。
+        // U + I 并击输出反引号
+        combo_grave {
+            timeout-ms = <50>;
+            key-positions = <6 7>;
+            bindings = <&kp GRAVE>;
+        };
+
+        // F + J 并击输出 F20
         combo_f20 {
             timeout-ms = <50>;
             key-positions = <13 16>;
             bindings = <&kp F20>;
         };
 
-        // 左右鼠标键并击输出鼠标中键。
+        // 左右鼠标键并击输出鼠标中键
         middle_click {
             timeout-ms = <50>;
             key-positions = <33 34>;
@@ -80,7 +94,7 @@
     conditional_layers {
         compatible = "zmk,conditional-layers";
 
-        // 第 2 层和第 3 层同时激活时，自动进入第 5 层设备控制层。
+        // 第 2 层和第 3 层同时激活时，自动进入第 5 层设备控制层
         device_layer {
             if-layers = <2 3>;
             then-layer = <5>;
@@ -146,18 +160,18 @@
         };
 
         // 第 3 层：数字符号层
-        // - 左手放数字
-        // - 右手放右修饰键
+        // - 第一排放 1-0
+        // - 第二排放左右修饰键
         // - 第三排集中常用符号
-        // - 左旋钮按下透传、旋转改成亮度调节；右旋钮旋转显式保持第 0 层，按下透传
+        // - 左旋钮按下透传、旋转改成亮度调节右旋钮旋转显式保持第 0 层，按下透传
         number_symbol_layer {
             bindings = <
-        // 第一排：数字
-            &kp N1         &kp N2         &kp N3        &kp N4         &kp N5            &none          &none           &none           &none         &none
-        // 第二排：数字 + 右修饰键
-            &kp N6         &kp N7         &kp N8        &kp N9         &kp N0            &kp RALT       &kp RCTRL       &kp RSHFT       &kp RGUI      &none
-        // 第三排：反引号、减号、等号、方括号、反斜杠、单引号
-            &kp GRAVE      &kp MINUS      &kp EQUAL     &kp LBKT       &kp RBKT          &kp BSLH       &kp SQT         &none           &none         &none
+        // 第一排：数字 1-0
+            &kp N1         &kp N2         &kp N3        &kp N4         &kp N5            &kp N6         &kp N7          &kp N8          &kp N9        &kp N0
+        // 第二排：左修饰键 + 右修饰键
+            &none          &kp LGUI       &kp LSHFT     &kp LCTRL      &kp LALT          &kp RALT       &kp RCTRL       &kp RSHFT       &kp RGUI      &none
+        // 第三排：反引号、减号、等号、Caps Lock、单引号、左方括号、右方括号、反斜杠
+            &none          &kp GRAVE      &kp MINUS     &kp EQUAL      &kp CAPS          &kp SQT        &kp LBKT        &kp RBKT        &kp BSLH      &none
         // 底行：旋钮按下保持透传，其余保持透传
                         &trans        &trans         &trans        &trans          &trans            &trans        &trans          &trans
             >;
