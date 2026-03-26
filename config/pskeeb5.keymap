@@ -12,11 +12,13 @@
 #define U_MSS_TP_S_I &mms MS_TP_SENSITIVITY_INCR
 #define U_MSS_TP_S_D &mms MS_TP_SENSITIVITY_DECR
 
+#define ENCODER_SCROLL_STEP 280
+
 // 默认层旋钮行为：
 // 左旋钮顺时针音量加、逆时针音量减
 // 右旋钮顺时针上滚动、逆时针下滚动
 #define BASE_LEFT_ENCODER &inc_dec_kp C_VOL_DN C_VOL_UP
-#define BASE_RIGHT_ENCODER &inc_dec_msc SCRL_DOWN SCRL_UP
+#define BASE_RIGHT_ENCODER &inc_dec_msc MOVE_Y(-ENCODER_SCROLL_STEP) MOVE_Y(ENCODER_SCROLL_STEP)
 
 // 第 2 层旋钮行为：
 // 右旋钮顺时针右箭头、逆时针左箭头
