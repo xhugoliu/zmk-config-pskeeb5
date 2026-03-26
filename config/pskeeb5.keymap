@@ -12,7 +12,7 @@
 #define U_MSS_TP_S_I &mms MS_TP_SENSITIVITY_INCR
 #define U_MSS_TP_S_D &mms MS_TP_SENSITIVITY_DECR
 
-#define ENCODER_SCROLL_STEP 280
+#define ENCODER_SCROLL_STEP 500
 
 // 默认层旋钮行为：
 // 左旋钮顺时针音量加、逆时针音量减
