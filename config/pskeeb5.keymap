@@ -12,7 +12,7 @@
 #define U_MSS_TP_S_I &mms MS_TP_SENSITIVITY_INCR
 #define U_MSS_TP_S_D &mms MS_TP_SENSITIVITY_DECR
 
-#define ENCODER_SCROLL_STEP 1000
+#define ENCODER_SCROLL_STEP 2000
 
 // 默认层旋钮行为：
 // 左旋钮顺时针音量加、逆时针音量减
@@ -65,24 +65,24 @@
     combos {
         compatible = "zmk,combos";
 
-        // S + D 并击输出 Tab
+        // W + E 并击输出 Tab
         combo_tab {
             timeout-ms = <50>;
-            key-positions = <11 12>;
+            key-positions = <1 2>;
             bindings = <&kp TAB>;
         };
 
-        // K + L 并击输出反引号
+        // E + R 并击输出反引号
         combo_grave {
             timeout-ms = <50>;
-            key-positions = <17 18>;
+            key-positions = <2 3>;
             bindings = <&kp GRAVE>;
         };
 
-        // F + J 并击输出 F20
+        // U + I 并击输出 F20
         combo_f20 {
             timeout-ms = <50>;
-            key-positions = <13 16>;
+            key-positions = <6 7>;
             bindings = <&kp F20>;
         };
 
