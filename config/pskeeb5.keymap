@@ -65,12 +65,53 @@
     combos {
         compatible = "zmk,combos";
 
+
+        // W + E 并击输出 Esc
+        combo_esc {
+            timeout-ms = <50>;
+            layers = <0>;
+            key-positions = <1 2>;
+            bindings = <&kp ESC>;
+        };
+
         // E + R 并击输出 Tab
         combo_tab {
             timeout-ms = <50>;
             layers = <0>;
             key-positions = <2 3>;
             bindings = <&kp TAB>;
+        };
+
+        // W + R 并击输出 Space
+        combo_space {
+            timeout-ms = <50>;
+            layers = <0>;
+            key-positions = <1 3>;
+            bindings = <&kp SPACE>;
+        };
+
+        // U + I 并击输出 Backspace
+        combo_backspace {
+            timeout-ms = <50>;
+            layers = <0>;
+            key-positions = <6 7>;
+            bindings = <&kp BSPC>;
+        };
+
+        // I + O 并击输出 Delete
+        combo_delete {
+            timeout-ms = <50>;
+            layers = <0>;
+            key-positions = <7 8>;
+            bindings = <&kp DEL>;
+        };
+
+        // U + O 并击输出 Enter
+        combo_enter {
+            timeout-ms = <50>;
+            layers = <0>;
+            key-positions = <6 8>;
+            bindings = <&kp ENTER>;
         };
 
         // W + S 并击输出反引号
