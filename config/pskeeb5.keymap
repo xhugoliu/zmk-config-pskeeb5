@@ -68,27 +68,87 @@
         // E + R 并击输出 Tab
         combo_tab {
             timeout-ms = <50>;
+            layers = <0>;
             key-positions = <2 3>;
             bindings = <&kp TAB>;
         };
 
-        // W + E 并击输出反引号
+        // W + S 并击输出反引号
         combo_grave {
             timeout-ms = <50>;
-            key-positions = <1 2>;
+            layers = <0>;
+            key-positions = <1 11>;
             bindings = <&kp GRAVE>;
         };
 
-        // U + I 并击输出 F20
+        // E + D 并击输出减号
+        combo_minus {
+            timeout-ms = <50>;
+            layers = <0>;
+            key-positions = <2 12>;
+            bindings = <&kp MINUS>;
+        };
+
+        // R + F 并击输出等号
+        combo_equal {
+            timeout-ms = <50>;
+            layers = <0>;
+            key-positions = <3 13>;
+            bindings = <&kp EQUAL>;
+        };
+
+        // T + G 并击输出 Caps Lock
+        combo_caps {
+            timeout-ms = <50>;
+            layers = <0>;
+            key-positions = <4 14>;
+            bindings = <&kp CAPS>;
+        };
+
+        // Y + H 并击输出单引号
+        combo_quote {
+            timeout-ms = <50>;
+            layers = <0>;
+            key-positions = <5 15>;
+            bindings = <&kp SQT>;
+        };
+
+        // U + J 并击输出左方括号
+        combo_left_bracket {
+            timeout-ms = <50>;
+            layers = <0>;
+            key-positions = <6 16>;
+            bindings = <&kp LBKT>;
+        };
+
+        // I + K 并击输出右方括号
+        combo_right_bracket {
+            timeout-ms = <50>;
+            layers = <0>;
+            key-positions = <7 17>;
+            bindings = <&kp RBKT>;
+        };
+
+        // O + L 并击输出反斜杠
+        combo_backslash {
+            timeout-ms = <50>;
+            layers = <0>;
+            key-positions = <8 18>;
+            bindings = <&kp BSLH>;
+        };
+
+        // F + J 并击输出 F20
         combo_f20 {
             timeout-ms = <50>;
-            key-positions = <6 7>;
+            layers = <0>;
+            key-positions = <13 16>;
             bindings = <&kp F20>;
         };
 
         // 左右鼠标键并击输出鼠标中键
         middle_click {
             timeout-ms = <50>;
+            layers = <0>;
             key-positions = <33 34>;
             bindings = <&mkp MCLK>;
         };
