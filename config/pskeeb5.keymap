@@ -109,7 +109,7 @@
             bindings = <&kp RBKT>;
         };
 
-        // L + . -> \
+        // L + . -> backslash
         combo_backslash {
             timeout-ms = <50>;
             layers = <0>;
