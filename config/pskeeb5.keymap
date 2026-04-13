@@ -8,29 +8,25 @@
 #include <behaviors/mouse_setting.dtsi>
 #include <dt-bindings/zmk/mouse_settings.h>
 
-// 小红点灵敏度快捷键，放在设备控制层中直接调用
+// 小红点灵敏度
 #define U_MSS_TP_S_I &mms MS_TP_SENSITIVITY_INCR
 #define U_MSS_TP_S_D &mms MS_TP_SENSITIVITY_DECR
 
 #define ENCODER_SCROLL_STEP 2000
 
-// 默认层旋钮行为：
-// 左旋钮顺时针音量加、逆时针音量减
-// 右旋钮顺时针上滚动、逆时针下滚动
+// 默认层旋钮：左音量，右滚动
 #define BASE_LEFT_ENCODER &inc_dec_kp C_VOL_DN C_VOL_UP
 #define BASE_RIGHT_ENCODER &inc_dec_msc MOVE_Y(-ENCODER_SCROLL_STEP) MOVE_Y(ENCODER_SCROLL_STEP)
 
-// 第 2 层旋钮行为：
-// 右旋钮顺时针右箭头、逆时针左箭头
+// 导航层右旋钮：方向
 #define NAV_RIGHT_ENCODER &inc_dec_kp LEFT RIGHT
 
-// 第 3 层旋钮行为：
-// 左旋钮顺时针亮度加、逆时针亮度减
+// 鼠标层左旋钮：亮度
 #define SYMBOL_LEFT_ENCODER &inc_dec_kp C_BRI_DN C_BRI_UP
 
 / {
     behaviors {
-        // 轻击输出普通按键，按住输出修饰键
+        // 点按出键，长按出修饰键
         ht: hold_tap {
             display-name = "Hold Tap";
             label = "hold_tap";
@@ -42,7 +38,7 @@
             bindings = <&kp>, <&kp>;
         };
 
-        // 轻击输出按键，按住临时进入目标层
+        // 点按出键，长按切层
         lt: layer_tap {
             display-name = "Layer Tap";
             compatible = "zmk,behavior-hold-tap";
@@ -53,7 +49,7 @@
             bindings = <&mo>, <&kp>;
         };
 
-        // 编码器滚轮行为模板，使用时传入两个滚轮方向参数
+        // 编码器滚轮模板
         inc_dec_msc: sensor_rotate_msc {
             compatible = "zmk,behavior-sensor-rotate-var";
             #sensor-binding-cells = <2>;
@@ -65,120 +61,63 @@
     combos {
         compatible = "zmk,combos";
 
-
-        // W + E 并击输出 Esc
-        combo_esc {
-            timeout-ms = <50>;
-            layers = <0>;
-            key-positions = <1 2>;
-            bindings = <&kp ESC>;
-        };
-
-        // E + R 并击输出 Tab
-        combo_tab {
-            timeout-ms = <50>;
-            layers = <0>;
-            key-positions = <2 3>;
-            bindings = <&kp TAB>;
-        };
-
-        // W + R 并击输出 Space
-        combo_space {
-            timeout-ms = <50>;
-            layers = <0>;
-            key-positions = <1 3>;
-            bindings = <&kp SPACE>;
-        };
-
-        // U + I 并击输出 Backspace
-        combo_backspace {
-            timeout-ms = <50>;
-            layers = <0>;
-            key-positions = <6 7>;
-            bindings = <&kp BSPC>;
-        };
-
-        // I + O 并击输出 Delete
-        combo_delete {
-            timeout-ms = <50>;
-            layers = <0>;
-            key-positions = <7 8>;
-            bindings = <&kp DEL>;
-        };
-
-        // U + O 并击输出 Enter
-        combo_enter {
-            timeout-ms = <50>;
-            layers = <0>;
-            key-positions = <6 8>;
-            bindings = <&kp ENTER>;
-        };
-
-        // W + S 并击输出反引号
+        // S + X -> `
         combo_grave {
             timeout-ms = <50>;
             layers = <0>;
-            key-positions = <1 11>;
+            key-positions = <11 21>;
             bindings = <&kp GRAVE>;
         };
 
-        // E + D 并击输出减号
+        // D + C -> -
         combo_minus {
             timeout-ms = <50>;
             layers = <0>;
-            key-positions = <2 12>;
+            key-positions = <12 22>;
             bindings = <&kp MINUS>;
         };
 
-        // R + F 并击输出等号
+        // F + V -> =
         combo_equal {
             timeout-ms = <50>;
             layers = <0>;
-            key-positions = <3 13>;
+            key-positions = <13 23>;
             bindings = <&kp EQUAL>;
         };
 
-        // T + G 并击输出 Caps Lock
-        combo_caps {
-            timeout-ms = <50>;
-            layers = <0>;
-            key-positions = <4 14>;
-            bindings = <&kp CAPS>;
-        };
-
-        // Y + H 并击输出单引号
+        // H + N -> '
         combo_quote {
             timeout-ms = <50>;
             layers = <0>;
-            key-positions = <5 15>;
+            key-positions = <15 25>;
             bindings = <&kp SQT>;
         };
 
-        // U + J 并击输出左方括号
+        // J + M -> [
         combo_left_bracket {
             timeout-ms = <50>;
             layers = <0>;
-            key-positions = <6 16>;
+            key-positions = <16 26>;
             bindings = <&kp LBKT>;
         };
 
-        // I + K 并击输出右方括号
+        // K + , -> ]
         combo_right_bracket {
             timeout-ms = <50>;
             layers = <0>;
-            key-positions = <7 17>;
+            key-positions = <17 27>;
             bindings = <&kp RBKT>;
         };
 
-        // O + L 并击输出反斜杠
+        // L + . -> \
         combo_backslash {
             timeout-ms = <50>;
             layers = <0>;
-            key-positions = <8 18>;
+            key-positions = <18 28>;
             bindings = <&kp BSLH>;
         };
 
-        // F + J 并击输出 F20
+        // F + J -> F20
         combo_f20 {
             timeout-ms = <50>;
             layers = <0>;
@@ -186,11 +125,27 @@
             bindings = <&kp F20>;
         };
 
-        // 左右鼠标键并击输出鼠标中键
-        middle_click {
+        // D + K -> Ctrl + Space
+        combo_ctrl_space {
             timeout-ms = <50>;
             layers = <0>;
-            key-positions = <33 34>;
+            key-positions = <12 17>;
+            bindings = <&kp LC(SPACE)>;
+        };
+
+        // S + L -> Gui + Space
+        combo_gui_space {
+            timeout-ms = <50>;
+            layers = <0>;
+            key-positions = <11 18>;
+            bindings = <&kp LG(SPACE)>;
+        };
+
+        // MB1 + MB2 -> MB3
+        combo_mouse_middle_click {
+            timeout-ms = <50>;
+            layers = <3>;
+            key-positions = <5 6>;
             bindings = <&mkp MCLK>;
         };
     };
@@ -198,7 +153,7 @@
     conditional_layers {
         compatible = "zmk,conditional-layers";
 
-        // 第 2 层和第 3 层同时激活时，自动进入第 5 层设备控制层
+        // 2 + 3 -> 5
         device_layer {
             if-layers = <2 3>;
             then-layer = <5>;
@@ -208,113 +163,68 @@
     keymap {
         compatible = "zmk,keymap";
 
-        // 第 0 层：默认输入层
-        // - 主键区是标准 QWERTY
-        // - S D F G / H J K L 为 home-row mods
-        // - Esc / Space / Enter / Backspace 按住分别进入第 1 / 2 / 3 / 4 层
-        // - 左旋钮按下静音，右旋钮按下 Print Screen
+        // 默认层：QWERTY + homerow mods；Esc/Space/Enter/Del 长按切 1/2/3/4；左旋钮静音，右旋钮截图
         default_layer {
             bindings = <
-        // 第一排：QWERTY 顶排
-            &kp Q          &kp W          &kp E          &kp R          &kp T             &kp Y          &kp U           &kp I           &kp O         &kp P
-        // 第二排：主字母 + home-row mods
-            &kp A          &ht LGUI S     &ht LSHFT D    &ht LCTRL F    &ht LALT G        &ht RALT H     &ht RCTRL J     &ht RSHFT K     &ht RGUI L    &kp SEMI
-        // 第三排：标准底排
-            &kp Z          &kp X          &kp C          &kp V          &kp B             &kp N          &kp M           &kp COMMA       &kp DOT       &kp FSLH
-        // 底行：左旋钮按下、Esc/Space 层切换、鼠标左右键、Enter/Backspace 层切换、右旋钮按下
-                        &kp C_MUTE    &lt 1 ESC     &lt 2 SPACE   &mkp RCLK      &mkp LCLK       &lt 3 ENTER   &lt 4 BSPC      &kp PSCRN
+                &kp Q          &kp W          &ht LALT E      &kp R           &kp T              &kp Y          &kp U            &ht LALT I      &kp O          &kp P
+                &kp A          &ht LGUI S     &ht LSHFT D     &ht LCTRL F     &kp G              &kp H          &ht LCTRL J      &ht LSHFT K     &ht LGUI L     &kp SEMI
+                &kp Z          &kp X          &kp C           &kp V           &kp B              &kp N          &kp M            &kp COMMA       &kp DOT        &kp FSLH
+                                &kp C_MUTE    &lt 1 ESC        &lt 2 SPACE      &kp TAB            &kp BSPC       &lt 3 ENTER       &lt 4 DEL        &kp PSCRN
             >;
             sensor-bindings = <BASE_LEFT_ENCODER BASE_RIGHT_ENCODER>;
         };
 
-        // 第 1 层：小数字键盘层
-        // - 右手是小键盘主体
-        // - 左手补一组常用左修饰键
-        // - 旋钮旋转显式保持第 0 层行为，按下继续走按键透传
+        // 小数字键盘：右手数字区，左手补修饰键；旋钮保持默认
         numpad_layer {
             bindings = <
-        // 第一排：右手数字区上排
-            &none          &none          &none         &none          &none             &kp KP_PLUS    &kp N7          &kp N8          &kp N9        &kp N0
-        // 第二排：左修饰键 + 小键盘中排
-            &none          &kp LGUI       &kp LSHFT     &kp LCTRL      &kp LALT          &kp KP_MINUS   &kp N4          &kp N5          &kp N6        &kp KP_MULTIPLY
-        // 第三排：小键盘下排
-            &none          &none          &none         &none          &none             &kp KP_EQUAL &kp N1          &kp N2          &kp N3        &kp KP_DIVIDE
-        // 底行：旋钮按下保持透传，右侧补 Kp 0 和 Kp .
-                        &trans        &trans         &trans        &trans          &trans            &kp N0        &kp KP_DOT      &trans
+                &none          &none          &kp LALT        &none           &none             &kp KP_PLUS    &kp N7           &kp N8          &kp N9         &kp KP_MULTIPLY
+                &none          &kp LGUI       &kp LSHFT       &kp LCTRL       &none             &kp KP_MINUS   &kp N4           &kp N5          &kp N6         &kp KP_DIVIDE
+                &none          &none          &none           &none           &none             &kp N0         &kp N1           &kp N2          &kp N3         &kp KP_DOT
+                                &trans         &trans          &trans          &trans            &trans         &trans           &trans          &trans
             >;
             sensor-bindings = <BASE_LEFT_ENCODER BASE_RIGHT_ENCODER>;
         };
 
-        // 第 2 层：方向导航层
-        // - 右手中区是 Home / PgDn / PgUp / End 和方向键
-        // - 最下一排右手改成滚动方向
-        // - 左旋钮旋转保持第 0 层音量，右旋钮旋转改成左右方向键，按下继续透传
+        // 导航层：PgUp/PgDn/Home/End + 方向键；右旋钮改为左右方向键
         navigation_layer {
             bindings = <
-        // 第一排：导航键
-            &none          &none          &none         &none          &none             &kp HOME       &kp PG_DN       &kp PG_UP       &kp END       &none
-        // 第二排：左修饰键 + 方向键
-            &none          &kp LGUI       &kp LSHFT     &kp LCTRL      &kp LALT          &kp LEFT       &kp DOWN        &kp UP          &kp RIGHT     &none
-        // 第三排：滚动方向
-            &none          &none          &none         &none          &none             &msc SCRL_LEFT &msc SCRL_DOWN  &msc SCRL_UP    &msc SCRL_RIGHT &none
-        // 底行：旋钮按下保持透传，其余大多透传，仅最右侧拇指键改成 Delete
-                        &trans        &trans         &trans        &trans          &trans            &trans        &kp DEL         &trans
+                &none          &none          &kp LALT        &none           &none             &kp PG_UP      &none            &kp UP          &none          &kp HOME
+                &none          &kp LGUI       &kp LSHFT       &kp LCTRL       &none             &none          &kp LEFT         &kp DOWN        &kp RIGHT      &none
+                &none          &none          &none           &none           &none             &kp PG_DN      &none            &none           &none          &kp END
+                                &trans         &trans          &trans          &trans            &trans         &trans           &trans          &trans
             >;
             sensor-bindings = <BASE_LEFT_ENCODER NAV_RIGHT_ENCODER>;
         };
 
-        // 第 3 层：鼠标光标层
-        // - 第一排放光标上移和鼠标左右中键
-        // - 第二排放光标左下右移动
-        // - 第三排留空，方便后续继续扩展
-        // - 左旋钮按下透传、旋转改成亮度调节右旋钮旋转显式保持第 0 层，按下透传
+        // 鼠标层：左手滚动/移动，右手鼠标键/修饰键；左旋钮调亮度
         number_symbol_layer {
             bindings = <
-        // 第一排：光标上移 + 鼠标左右中键
-            &none          &none          &mmv MOVE_UP  &none          &none             &none          &mkp LCLK       &mkp MCLK       &mkp RCLK     &none
-        // 第二排：光标左下右移动
-            &none          &mmv MOVE_LEFT &mmv MOVE_DOWN &mmv MOVE_RIGHT &none            &none          &none           &none           &none         &none
-        // 第三排：留空
-            &none          &none          &none         &none          &none             &none          &none           &none           &none         &none
-        // 底行：旋钮按下保持透传，其余保持透传
-                        &trans        &trans         &trans        &trans          &trans            &trans        &trans          &trans
+                &msc SCRL_LEFT &none          &mmv MOVE_UP     &none           &msc SCRL_UP      &mkp MB1       &mkp MB2         &kp LALT        &mkp MB4       &mkp MB5
+                &none          &mmv MOVE_LEFT &mmv MOVE_DOWN   &mmv MOVE_RIGHT &none             &none          &kp LCTRL        &kp LSHFT       &kp LGUI       &none
+                &msc SCRL_RIGHT &none         &none            &none           &msc SCRL_DOWN    &none          &none            &none           &none          &none
+                                &trans         &trans          &trans          &trans            &trans         &trans           &trans          &trans
             >;
             sensor-bindings = <SYMBOL_LEFT_ENCODER BASE_RIGHT_ENCODER>;
         };
 
-        // 第 4 层：Fn 层
-        // - 左手放 F1-F12
-        // - 右手补一组右修饰键
-        // - 旋钮旋转显式保持第 0 层行为，按下继续走按键透传
+        // Fn 层：左手 F1-F12，右手修饰键；旋钮保持默认
         function_layer {
             bindings = <
-        // 第一排：F1-F4
-            &kp F1         &kp F2         &kp F3        &kp F4         &none             &none          &none           &none           &none         &none
-        // 第二排：F5-F8 + 右修饰键
-            &kp F5         &kp F6         &kp F7        &kp F8         &none             &kp RALT       &kp RCTRL       &kp RSHFT       &kp RGUI      &none
-        // 第三排：F9-F12
-            &kp F9         &kp F10        &kp F11       &kp F12        &none             &none          &none           &none           &none         &none
-        // 底行：旋钮按下保持透传，其余透传
-                        &trans        &trans         &trans        &trans          &trans            &trans        &trans          &trans
+                &kp F1         &kp F2         &kp F3          &kp F4          &none             &none          &none            &kp LALT        &none          &none
+                &kp F5         &kp F6         &kp F7          &kp F8          &none             &none          &kp LCTRL        &kp LSHFT       &kp LGUI       &none
+                &kp F9         &kp F10        &kp F11         &kp F12         &none             &none          &none            &none           &none          &none
+                                &trans         &trans          &trans          &trans            &trans         &trans           &trans          &trans
             >;
             sensor-bindings = <BASE_LEFT_ENCODER BASE_RIGHT_ENCODER>;
         };
 
-        // 第 5 层：设备控制层
-        // - 通过第 2 层 + 第 3 层同时按住进入
-        // - 左手切换蓝牙 1-5
-        // - 右手调小红点灵敏度、清空当前蓝牙 profile 配对
-        // - 旋钮旋转显式保持第 0 层行为，按下继续走按键透传
+        // 设备层：2+3 同时激活；切蓝牙、调小红点灵敏度、清配对
         device_layer {
             bindings = <
-        // 第一排：留空，避免误触
-            &none          &none          &none         &none          &none             &none          &none           &none           &none         &none
-        // 第二排：蓝牙 profile + 设备控制
-            &bt BT_SEL 0   &bt BT_SEL 1   &bt BT_SEL 2  &bt BT_SEL 3   &bt BT_SEL 4      &none          U_MSS_TP_S_D   &bt BT_CLR      U_MSS_TP_S_I &none
-        // 第三排：留空，避免误触
-            &none          &none          &none         &none          &none             &none          &none           &none           &none         &none
-        // 底行：旋钮按下保持透传，其余透传
-                        &trans        &trans         &trans        &trans          &trans            &trans        &trans          &trans
+                &none          &none          &none           &none           &none             &none          &none            &none           &none          &none
+                &bt BT_SEL 0   &bt BT_SEL 1   &bt BT_SEL 2    &bt BT_SEL 3    &bt BT_SEL 4      &none          U_MSS_TP_S_D    &bt BT_CLR      U_MSS_TP_S_I  &none
+                &none          &none          &none           &none           &none             &none          &none            &none           &none          &none
+                                &trans         &trans          &trans          &trans            &trans         &trans           &trans          &trans
             >;
             sensor-bindings = <BASE_LEFT_ENCODER BASE_RIGHT_ENCODER>;
         };
