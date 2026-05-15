@@ -8,6 +8,13 @@
 #include <behaviors/mouse_setting.dtsi>
 #include <dt-bindings/zmk/mouse_settings.h>
 
+/ {
+    mouse_ps2_input_listener {
+        // keymap overlay 加载晚于 shield overlay，这里确保最终滚动层是第 2 层。
+        scroll-layer = <2>;
+    };
+};
+
 // 小红点灵敏度
 #define U_MSS_TP_S_I &mms MS_TP_SENSITIVITY_INCR
 #define U_MSS_TP_S_D &mms MS_TP_SENSITIVITY_DECR
