@@ -1,6 +1,22 @@
+#include <input/processors.dtsi>
+#include <dt-bindings/zmk/input_transform.h>
+
 / {
     mouse_ps2_input_listener {
-        // Use the navigation layer as the explicit trackpoint scroll layer.
-        scroll-layer = <2>;
+        compatible = "zmk,input-listener";
+        /delete-property/ xy-swap;
+        /delete-property/ scroll-layer;
+
+        input-processors = <&zip_xy_swap_mapper>;
+
+        // Any non-default layer turns TrackPoint movement into scrolling.
+        scroller {
+            layers = <1 2 3 4 5>;
+            input-processors = <
+                &zip_xy_swap_mapper
+                &zip_xy_to_scroll_mapper
+                &zip_scroll_transform (INPUT_TRANSFORM_Y_INVERT)
+            >;
+        };
     };
 };
