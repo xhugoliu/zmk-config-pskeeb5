@@ -12,17 +12,17 @@
 #define U_MSS_TP_S_I &mms MS_TP_SENSITIVITY_INCR
 #define U_MSS_TP_S_D &mms MS_TP_SENSITIVITY_DECR
 
-#define ENCODER_SCROLL_STEP 2000
-
-// 默认层旋钮：左音量，右滚动
+// 默认层左旋钮：音量
 #define BASE_LEFT_ENCODER &inc_dec_kp C_VOL_DN C_VOL_UP
-#define BASE_RIGHT_ENCODER &inc_dec_msc MOVE_Y(-ENCODER_SCROLL_STEP) MOVE_Y(ENCODER_SCROLL_STEP)
-
-// 导航层右旋钮：方向
-#define NAV_RIGHT_ENCODER &inc_dec_kp LEFT RIGHT
 
 // 鼠标层左旋钮：亮度
 #define SYMBOL_LEFT_ENCODER &inc_dec_kp C_BRI_DN C_BRI_UP
+
+// 默认层右旋钮：左右方向
+#define BASE_RIGHT_ENCODER &inc_dec_kp LEFT RIGHT
+
+// 导航层右旋钮：上下方向
+#define NAV_RIGHT_ENCODER &inc_dec_kp DOWN UP
 
 / {
     behaviors {
@@ -61,59 +61,59 @@
     combos {
         compatible = "zmk,combos";
 
-        // S + X -> `
+        // W + S -> `
         combo_grave {
             timeout-ms = <50>;
             layers = <0>;
-            key-positions = <11 21>;
+            key-positions = <1 11>;
             bindings = <&kp GRAVE>;
         };
 
-        // D + C -> -
+        // E + D -> -
         combo_minus {
             timeout-ms = <50>;
             layers = <0>;
-            key-positions = <12 22>;
+            key-positions = <2 12>;
             bindings = <&kp MINUS>;
         };
 
-        // F + V -> =
+        // R + F -> =
         combo_equal {
             timeout-ms = <50>;
             layers = <0>;
-            key-positions = <13 23>;
+            key-positions = <3 13>;
             bindings = <&kp EQUAL>;
         };
 
-        // H + N -> '
+        // Y + H -> '
         combo_quote {
             timeout-ms = <50>;
             layers = <0>;
-            key-positions = <15 25>;
+            key-positions = <5 15>;
             bindings = <&kp SQT>;
         };
 
-        // J + M -> [
+        // U + J -> [
         combo_left_bracket {
             timeout-ms = <50>;
             layers = <0>;
-            key-positions = <16 26>;
+            key-positions = <6 16>;
             bindings = <&kp LBKT>;
         };
 
-        // K + , -> ]
+        // I + K -> ]
         combo_right_bracket {
             timeout-ms = <50>;
             layers = <0>;
-            key-positions = <17 27>;
+            key-positions = <7 17>;
             bindings = <&kp RBKT>;
         };
 
-        // L + . -> backslash
+        // O + L -> backslash
         combo_backslash {
             timeout-ms = <50>;
             layers = <0>;
-            key-positions = <18 28>;
+            key-positions = <8 18>;
             bindings = <&kp BSLH>;
         };
 
@@ -141,13 +141,6 @@
             bindings = <&kp LG(SPACE)>;
         };
 
-        // MB1 + MB2 -> MB3
-        combo_mouse_middle_click {
-            timeout-ms = <50>;
-            layers = <3>;
-            key-positions = <5 6>;
-            bindings = <&mkp MCLK>;
-        };
     };
 
     conditional_layers {
@@ -163,13 +156,13 @@
     keymap {
         compatible = "zmk,keymap";
 
-        // 默认层：QWERTY + homerow mods；Esc/Space/Enter/Del 长按切 1/2/3/4；左旋钮静音，右旋钮截图
+        // 默认层：QWERTY + homerow mods；Esc/Space/Enter/Backspace 长按切 1/2/3/4；左旋钮静音，右旋钮截图
         default_layer {
             bindings = <
-                &kp Q          &kp W          &ht LALT E      &kp R           &kp T              &kp Y          &kp U            &ht LALT I      &kp O          &kp P
-                &kp A          &ht LGUI S     &ht LSHFT D     &ht LCTRL F     &kp G              &kp H          &ht LCTRL J      &ht LSHFT K     &ht LGUI L     &kp SEMI
+                &kp Q          &kp W          &kp E           &kp R           &kp T              &kp Y          &kp U            &kp I           &kp O          &kp P
+                &kp A          &ht LGUI S     &ht LSHFT D     &ht LCTRL F     &ht LALT G         &ht LALT H     &ht LCTRL J      &ht LSHFT K     &ht LGUI L     &kp SEMI
                 &kp Z          &kp X          &kp C           &kp V           &kp B              &kp N          &kp M            &kp COMMA       &kp DOT        &kp FSLH
-                                &kp C_MUTE    &lt 1 ESC        &lt 2 SPACE      &kp TAB            &kp BSPC       &lt 3 ENTER       &lt 4 DEL        &kp PSCRN
+                                &kp C_MUTE    &lt 1 ESC        &lt 2 SPACE      &kp TAB           &mkp LCLK      &lt 3 ENTER       &lt 4 BSPC       &kp PSCRN
             >;
             sensor-bindings = <BASE_LEFT_ENCODER BASE_RIGHT_ENCODER>;
         };
@@ -177,42 +170,42 @@
         // 小数字键盘：右手数字区，左手补修饰键；旋钮保持默认
         numpad_layer {
             bindings = <
-                &none          &none          &kp LALT        &none           &none             &kp KP_PLUS    &kp N7           &kp N8          &kp N9         &kp KP_MULTIPLY
-                &none          &kp LGUI       &kp LSHFT       &kp LCTRL       &none             &kp KP_MINUS   &kp N4           &kp N5          &kp N6         &kp KP_DIVIDE
-                &none          &none          &none           &none           &none             &kp N0         &kp N1           &kp N2          &kp N3         &kp KP_DOT
-                                &trans         &trans          &trans          &trans            &trans         &trans           &trans          &trans
+                &none          &none          &none           &none           &none             &kp KP_PLUS    &kp N7           &kp N8          &kp N9         &kp N0
+                &none          &kp LGUI       &kp LSHFT       &kp LCTRL       &kp LALT          &kp KP_MINUS   &kp N4           &kp N5          &kp N6         &kp KP_MULTIPLY
+                &none          &none          &none           &none           &none             &kp KP_EQUAL   &kp N1           &kp N2          &kp N3         &kp KP_DIVIDE
+                                &trans         &trans          &trans          &trans            &trans         &kp N0           &kp KP_DOT      &trans
             >;
             sensor-bindings = <BASE_LEFT_ENCODER BASE_RIGHT_ENCODER>;
         };
 
-        // 导航层：PgUp/PgDn/Home/End + 方向键；右旋钮改为左右方向键
+        // 导航层：Home/PgDn/PgUp/End + 方向键 + 滚动；右旋钮改为上下方向键
         navigation_layer {
             bindings = <
-                &none          &none          &kp LALT        &none           &none             &kp PG_UP      &none            &kp UP          &none          &kp HOME
-                &none          &kp LGUI       &kp LSHFT       &kp LCTRL       &none             &none          &kp LEFT         &kp DOWN        &kp RIGHT      &none
-                &none          &none          &none           &none           &none             &kp PG_DN      &none            &none           &none          &kp END
-                                &trans         &trans          &trans          &trans            &trans         &trans           &trans          &trans
+                &none          &none          &none           &none           &none             &kp HOME       &kp PG_DN       &kp PG_UP       &kp END        &none
+                &none          &kp LGUI       &kp LSHFT       &kp LCTRL       &kp LALT          &kp LEFT       &kp DOWN        &kp UP          &kp RIGHT      &none
+                &none          &none          &none           &none           &none             &msc SCRL_LEFT &msc SCRL_DOWN  &msc SCRL_UP    &msc SCRL_RIGHT &none
+                                &trans         &trans          &trans          &trans            &trans         &trans           &kp DEL         &trans
             >;
             sensor-bindings = <BASE_LEFT_ENCODER NAV_RIGHT_ENCODER>;
         };
 
-        // 鼠标层：左手滚动/移动，右手鼠标键/修饰键；左旋钮调亮度
+        // 鼠标层：光标移动 + 鼠标键 + home row 修饰键；左旋钮调亮度
         number_symbol_layer {
             bindings = <
-                &msc SCRL_LEFT &none          &mmv MOVE_UP     &none           &msc SCRL_UP      &mkp MB1       &mkp MB2         &kp LALT        &mkp MB4       &mkp MB5
-                &none          &mmv MOVE_LEFT &mmv MOVE_DOWN   &mmv MOVE_RIGHT &none             &none          &kp LCTRL        &kp LSHFT       &kp LGUI       &none
-                &msc SCRL_RIGHT &none         &none            &none           &msc SCRL_DOWN    &none          &none            &none           &none          &none
+                &none          &none          &mmv MOVE_UP     &none           &none             &none          &mkp LCLK        &mkp MCLK       &mkp RCLK      &none
+                &none          &mmv MOVE_LEFT &mmv MOVE_DOWN   &mmv MOVE_RIGHT &none             &kp LALT       &kp LCTRL        &kp LSHFT       &kp LGUI       &none
+                &none          &none          &none            &none           &none             &none          &none            &none           &none          &none
                                 &trans         &trans          &trans          &trans            &trans         &trans           &trans          &trans
             >;
             sensor-bindings = <SYMBOL_LEFT_ENCODER BASE_RIGHT_ENCODER>;
         };
 
-        // Fn 层：左手 F1-F12，右手修饰键；旋钮保持默认
+        // Fn 层：F1-F20 + 右修饰键；旋钮保持默认
         function_layer {
             bindings = <
-                &kp F1         &kp F2         &kp F3          &kp F4          &none             &none          &none            &kp LALT        &none          &none
-                &kp F5         &kp F6         &kp F7          &kp F8          &none             &none          &kp LCTRL        &kp LSHFT       &kp LGUI       &none
-                &kp F9         &kp F10        &kp F11         &kp F12         &none             &none          &none            &none           &none          &none
+                &kp F1         &kp F2         &kp F3          &kp F4          &kp F5           &kp F16        &kp F17          &kp F18        &kp F19        &kp F20
+                &kp F6         &kp F7         &kp F8          &kp F9          &kp F10          &kp LALT       &kp LCTRL        &kp LSHFT      &kp LGUI       &none
+                &kp F11        &kp F12        &kp F13         &kp F14         &kp F15          &none          &none            &none          &none          &none
                                 &trans         &trans          &trans          &trans            &trans         &trans           &trans          &trans
             >;
             sensor-bindings = <BASE_LEFT_ENCODER BASE_RIGHT_ENCODER>;
