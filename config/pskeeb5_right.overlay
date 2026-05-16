@@ -1,6 +1,0 @@
-/ {
-    mouse_ps2_input_listener {
-        // 滚动层：沿用习惯的第 2 层，避开上游默认第 3 层。
-        scroll-layer = <2>;
-    };
-};
