@@ -65,6 +65,28 @@
         };
     };
 
+    macros {
+        ZMK_MACRO(type_abc111,
+            bindings = <&kp A &kp B &kp C &kp N1 &kp N1 &kp N1>;
+        )
+
+        ZMK_MACRO(type_abc222,
+            bindings = <&kp A &kp B &kp C &kp N2 &kp N2 &kp N2>;
+        )
+
+        ZMK_MACRO(type_abc333,
+            bindings = <&kp A &kp B &kp C &kp N3 &kp N3 &kp N3>;
+        )
+
+        ZMK_MACRO(type_abc444,
+            bindings = <&kp A &kp B &kp C &kp N4 &kp N4 &kp N4>;
+        )
+
+        ZMK_MACRO(type_abc555,
+            bindings = <&kp A &kp B &kp C &kp N5 &kp N5 &kp N5>;
+        )
+    };
+
     combos {
         compatible = "zmk,combos";
 
@@ -165,60 +187,60 @@
 
         default_layer {
             bindings = <
-                &kp Q          &kp W          &kp E           &kp R           &kp T              &kp Y          &kp U            &kp I           &kp O          &kp P
-                &kp A          &ht LGUI S     &ht LSHFT D     &ht LCTRL F     &ht LALT G         &ht LALT H     &ht LCTRL J      &ht LSHFT K     &ht LGUI L     &kp SEMI
-                &kp Z          &kp X          &kp C           &kp V           &kp B              &kp N          &kp M            &kp COMMA       &kp DOT        &kp FSLH
-                                &kp C_MUTE    &lt 1 ESC        &lt 2 SPACE      &kp TAB           &mkp LCLK      &lt 3 ENTER       &lt 4 BSPC       &kp PSCRN
+                &kp Q        &kp W        &kp E        &kp R        &kp T        &kp Y       &kp U        &kp I        &kp O       &kp P
+                &kp A        &ht LGUI S   &ht LSHFT D  &ht LCTRL F  &ht LALT G   &ht LALT H  &ht LCTRL J  &ht LSHFT K  &ht LGUI L  &kp SEMI
+                &kp Z        &kp X        &kp C        &kp V        &kp B        &kp N       &kp M        &kp COMMA    &kp DOT     &kp FSLH
+                             &kp C_MUTE   &lt 1 ESC    &lt 2 SPACE  &kp TAB      &mkp LCLK   &lt 3 ENTER  &lt 4 BSPC   &kp PSCRN
             >;
             sensor-bindings = <BASE_LEFT_ENCODER BASE_RIGHT_ENCODER>;
         };
 
         numpad_layer {
             bindings = <
-                &none          &none          &none           &none           &none             &none           &kp N7           &kp N8          &kp N9         &kp N0
-                &none          &kp LGUI       &kp LSHFT       &kp LCTRL       &kp LALT          &kp KP_PLUS     &kp N4           &kp N5          &kp N6         &kp KP_MULTIPLY
-                &none          &none          &none           &none           &none             &kp KP_MINUS    &kp N1           &kp N2          &kp N3         &kp KP_DIVIDE
-                                &trans         &trans          &trans          &trans            &mkp MCLK         &kp N0           &kp KP_DOT      &trans
+                &none       &none     &none     &none      &none      &none         &kp N7      &kp N8      &kp N9      &kp N0
+                &none       &kp LGUI  &kp LSHFT &kp LCTRL  &kp LALT   &kp KP_PLUS   &kp N4      &kp N5      &kp N6      &kp KP_MULTIPLY
+                &none       &none     &none     &none      &none      &kp KP_MINUS  &kp N1      &kp N2      &kp N3      &kp KP_DIVIDE
+                            &trans    &trans    &trans     &trans     &mkp MCLK     &kp N0      &kp KP_DOT  &trans
             >;
             sensor-bindings = <BASE_LEFT_ENCODER BASE_RIGHT_ENCODER>;
         };
 
         navigation_layer {
             bindings = <
-                &none          &none          &none           &none           &none             &kp HOME       &kp PG_DN       &kp PG_UP       &kp END        &none
-                &none          &kp LGUI       &kp LSHFT       &kp LCTRL       &kp LALT          &kp LEFT       &kp DOWN        &kp UP          &kp RIGHT      &none
-                &none          &none          &none           &none           &none             &msc SCRL_LEFT &msc SCRL_DOWN  &msc SCRL_UP    &msc SCRL_RIGHT &none
-                                &trans         &trans          &trans          &trans            &mkp RCLK         &trans           &kp DEL         &trans
+                &none       &none     &none     &none      &none     &kp HOME   &kp PG_DN  &kp PG_UP  &kp END    &none
+                &none       &kp LGUI  &kp LSHFT &kp LCTRL  &kp LALT  &kp LEFT   &kp DOWN   &kp UP     &kp RIGHT  &none
+                &none       &none     &none     &none      &none     &none      &none      &none      &none      &none
+                            &trans    &trans    &trans     &trans    &mkp RCLK  &trans     &kp DEL    &trans
             >;
             sensor-bindings = <BASE_LEFT_ENCODER NAV_RIGHT_ENCODER>;
         };
 
-        number_symbol_layer {
+        mouse_layer {
             bindings = <
-                &none          &none          &mmv MOVE_UP     &none           &none             &none          &none            &none           &none          &none
-                &none          &mmv MOVE_LEFT &mmv MOVE_DOWN   &mmv MOVE_RIGHT &none             &none          &mkp LCLK        &mkp MCLK       &mkp RCLK      &none
-                &none          &none          &none            &none           &none             &none          &none            &none           &none          &none
-                                &trans         &trans          &trans          &trans            &trans         &trans           &trans          &trans
+                &none       &mmv MOVE_LEFT &mmv MOVE_UP   &mmv MOVE_DOWN  &mmv MOVE_RIGHT  &mkp MB1  &mkp MB2  &mkp MB3   &mkp MB4  &mkp MB5
+                &none       &msc SCRL_LEFT &msc SCRL_UP   &msc SCRL_DOWN  &msc SCRL_RIGHT  &kp LALT  &kp LCTRL &kp LSHFT  &kp LGUI  &none
+                &none       &none          &none          &none           &none            &none     &none     &none      &none     &none
+                            &trans         &trans         &trans          &trans           &trans    &trans    &trans     &trans
             >;
             sensor-bindings = <SYMBOL_LEFT_ENCODER BASE_RIGHT_ENCODER>;
         };
 
         function_layer {
             bindings = <
-                &kp F1         &kp F2         &kp F3          &kp F4          &kp F5           &kp F16        &kp F17          &kp F18        &kp F19        &kp F20
-                &kp F6         &kp F7         &kp F8          &kp F9          &kp F10          &kp LALT       &kp LCTRL        &kp LSHFT      &kp LGUI       &none
-                &kp F11        &kp F12        &kp F13         &kp F14         &kp F15          &none          &none            &none          &none          &none
-                                &trans         &trans          &trans          &trans            &trans         &trans           &trans          &trans
+                &kp F1      &kp F2   &kp F3   &kp F4   &kp F5   &kp F16   &kp F17   &kp F18   &kp F19   &kp F20
+                &kp F6      &kp F7   &kp F8   &kp F9   &kp F10  &kp LALT  &kp LCTRL &kp LSHFT &kp LGUI  &none
+                &kp F11     &kp F12  &kp F13  &kp F14  &kp F15  &kp F21   &kp F22   &kp F23   &kp F24   &none
+                            &trans   &trans   &trans   &trans   &trans    &trans    &trans    &trans
             >;
             sensor-bindings = <BASE_LEFT_ENCODER BASE_RIGHT_ENCODER>;
         };
 
         device_layer {
             bindings = <
-                &none          &none          &none           &none           &none             &none          &none            &none           &none          &none
-                &bt BT_SEL 0   &bt BT_SEL 1   &bt BT_SEL 2    &bt BT_SEL 3    &bt BT_SEL 4      &none          U_MSS_TP_S_D    &bt BT_CLR      U_MSS_TP_S_I  &none
-                &none          &none          &none           &none           &none             &none          &none            &none           &none          &none
-                                &trans         &trans          &trans          &trans            &trans         &trans           &trans          &trans
+                &none        U_MSS_TP_S_D &bt BT_CLR   U_MSS_TP_S_I &none        &none        &kp C_PREVIOUS &kp C_PLAY_PAUSE &kp C_NEXT   &none
+                &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4 &type_abc111 &type_abc222   &type_abc333     &type_abc444 &type_abc555
+                &none        &none        &none        &none        &none        &none        &none          &none            &none        &none
+                             &trans       &trans       &trans       &trans       &trans       &trans         &trans           &trans
             >;
             sensor-bindings = <BASE_LEFT_ENCODER BASE_RIGHT_ENCODER>;
         };
